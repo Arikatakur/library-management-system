@@ -107,6 +107,13 @@ class TestLibraryManagementSystem(unittest.TestCase):
         results = empty_library.search_book()
         self.assertEqual(results, [])
 
+    def test_search_book_no_params_with_books(self):
+        # Test search_book explicitly when no parameters are passed and books exist
+        self.library.add_book("Title9", "Author9", "116")
+        self.library.add_book("Title10", "Author10", "117")
+        results = self.library.search_book()
+        self.assertEqual(len(results), 2)
+
     def test_list_empty_library(self):
         # Ensure list_available_books works with an empty library
         results = self.library.list_available_books()
@@ -120,6 +127,3 @@ class TestLibraryManagementSystem(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-
-
