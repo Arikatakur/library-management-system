@@ -72,7 +72,7 @@ class TestLibraryManagementSystem(unittest.TestCase):
         # Cover case where no books exist in the library
         empty_library = LibraryManagementSystem()
         results = empty_library.search_book()
-        self.assertEqual(len(results), 0)
+        self.assertEqual(results, [])  # Ensure an empty list is returned
 
     def test_list_available_books(self):
         # Test with no books in the library
@@ -105,7 +105,7 @@ class TestLibraryManagementSystem(unittest.TestCase):
         # Test search_book explicitly when no books exist and no parameters are passed
         empty_library = LibraryManagementSystem()
         results = empty_library.search_book()
-        self.assertEqual(results, [])
+        self.assertEqual(results, [])  # Ensure an empty list is returned
 
     def test_search_book_no_params_with_books(self):
         # Test search_book explicitly when no parameters are passed and books exist
