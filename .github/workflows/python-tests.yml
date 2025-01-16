@@ -28,6 +28,7 @@ jobs:
 
     - name: Run tests with coverage
       run: |
+        python -m untittest discover
         coverage run -m unittest discover
         coverage report --fail-under=100
 
