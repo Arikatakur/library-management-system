@@ -107,5 +107,16 @@ class TestLibraryManagementSystem(unittest.TestCase):
         results = empty_library.search_book()
         self.assertEqual(results, [])
 
+    def test_list_empty_library(self):
+        # Ensure list_available_books works with an empty library
+        results = self.library.list_available_books()
+        self.assertEqual(results, [])
+
+    def test_edge_case_no_match(self):
+        # Ensure search_book handles no match case correctly
+        self.library.add_book("Title8", "Author8", "115")
+        results = self.library.search_book(title="Nonexistent Title")
+        self.assertEqual(len(results), 0)
+
 if __name__ == "__main__":
     unittest.main()
