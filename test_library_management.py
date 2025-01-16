@@ -101,5 +101,11 @@ class TestLibraryManagementSystem(unittest.TestCase):
         available_books = self.library.list_available_books()
         self.assertEqual(len(available_books), 0)  # No books should be available
 
+    def test_search_book_no_params(self):
+        # Test search_book explicitly when no books exist and no parameters are passed
+        empty_library = LibraryManagementSystem()
+        results = empty_library.search_book()
+        self.assertEqual(results, [])
+
 if __name__ == "__main__":
     unittest.main()
