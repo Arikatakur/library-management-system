@@ -27,6 +27,11 @@ class TestLibraryManagementSystem(unittest.TestCase):
         result = self.library.borrow_book("999")
         self.assertEqual(result, "Book not found.")
 
+        # Test borrowing a book when no books exist
+        empty_library = LibraryManagementSystem()
+        result = empty_library.borrow_book("456")
+        self.assertEqual(result, "Book not found.")
+
     def test_return_book(self):
         self.library.add_book("Title3", "Author3", "789")
         self.library.borrow_book("789")
@@ -38,6 +43,11 @@ class TestLibraryManagementSystem(unittest.TestCase):
         self.assertEqual(result, "Book 'Title3' is already available.")
         
         result = self.library.return_book("999")
+        self.assertEqual(result, "Book not found.")
+
+        # Test returning a book when no books exist
+        empty_library = LibraryManagementSystem()
+        result = empty_library.return_book("789")
         self.assertEqual(result, "Book not found.")
 
     def test_search_book(self):
