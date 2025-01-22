@@ -1,4 +1,5 @@
 import unittest
+import subprocess
 from library_management_system import LibraryManagementSystem
 
 class TestLibraryManagementSystem(unittest.TestCase):
@@ -135,6 +136,16 @@ class TestLibraryManagementSystem(unittest.TestCase):
         self.assertEqual(len(results), 2)
         self.assertEqual(results[0]["title"], "Python Programming")
         self.assertEqual(results[1]["title"], "Advanced Python")
+
+    def test_main_execution(self):
+        """Test that the script can be run as a module."""
+        result = subprocess.run(
+            ["python", "-m", "test_library_management"],
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 0)  # Ensure the script runs successfully
+        self.assertIn("Ran 11 tests", result.stdout)  # Ensure the tests are executed
 
 if __name__ == "__main__":
     unittest.main()
