@@ -192,3 +192,5 @@ class TestLibraryManagementSystem(unittest.TestCase):
         )
         self.assertIn("OK", result.stdout)  # Check that the tests ran successfully
 
+if __name__ == "__main__":
+    unittest.main()
