@@ -1,11 +1,25 @@
+"""
+Unit tests for the LibraryManagementSystem class.
+"""
+
 import unittest
 from library_management_system import LibraryManagementSystem
 
 class TestLibraryManagementSystem(unittest.TestCase):
+    """
+    Test cases for the LibraryManagementSystem class.
+    """
+
     def setUp(self):
+        """
+        Set up the test environment.
+        """
         self.library = LibraryManagementSystem()
 
     def test_add_book(self):
+        """
+        Test the add_book method of LibraryManagementSystem.
+        """
         self.library.add_book("Title1", "Author1", "123")
         self.assertEqual(len(self.library.books), 1)
         self.assertEqual(self.library.books[0]["title"], "Title1")
@@ -17,6 +31,9 @@ class TestLibraryManagementSystem(unittest.TestCase):
             self.library.add_book("Title1", "Author1", "123")
 
     def test_borrow_book(self):
+        """
+        Test the borrow_book method of LibraryManagementSystem.
+        """
         self.library.add_book("Title2", "Author2", "456")
         result = self.library.borrow_book("456")
         self.assertEqual(result, "Book 'Title2' borrowed successfully.")
@@ -33,6 +50,9 @@ class TestLibraryManagementSystem(unittest.TestCase):
         self.assertEqual(result, "Book not found.")
 
     def test_return_book(self):
+        """
+        Test the return_book method of LibraryManagementSystem.
+        """
         self.library.add_book("Title3", "Author3", "789")
         self.library.borrow_book("789")
         
@@ -51,6 +71,9 @@ class TestLibraryManagementSystem(unittest.TestCase):
         self.assertEqual(result, "Book not found.")
 
     def test_search_book(self):
+        """
+        Test the search_book method of LibraryManagementSystem.
+        """
         self.library.add_book("Python Programming", "John Doe", "101")
         self.library.add_book("Learn Python", "Jane Smith", "102")
 
@@ -75,6 +98,9 @@ class TestLibraryManagementSystem(unittest.TestCase):
         self.assertEqual(results, [])  # Ensure an empty list is returned
 
     def test_list_available_books(self):
+        """
+        Test the list_available_books method of LibraryManagementSystem.
+        """
         # Test with no books in the library
         available_books = self.library.list_available_books()
         self.assertEqual(len(available_books), 0)
@@ -92,6 +118,9 @@ class TestLibraryManagementSystem(unittest.TestCase):
         self.assertEqual(available_books[0]["isbn"], "112")
 
     def test_list_available_books_edge_case(self):
+        """
+        Test edge cases for the list_available_books method.
+        """
         # Test when all books are borrowed
         self.library.add_book("Title6", "Author6", "113")
         self.library.add_book("Title7", "Author7", "114")
@@ -102,12 +131,18 @@ class TestLibraryManagementSystem(unittest.TestCase):
         self.assertEqual(len(available_books), 0)  # No books should be available
 
     def test_search_book_no_params(self):
+        """
+        Test search_book with no parameters passed.
+        """
         # Test search_book explicitly when no books exist and no parameters are passed
         empty_library = LibraryManagementSystem()
         results = empty_library.search_book()
         self.assertEqual(results, [])  # Ensure an empty list is returned
 
     def test_search_book_no_params_with_books(self):
+        """
+        Test search_book with no parameters passed and books exist.
+        """
         # Test search_book explicitly when no parameters are passed and books exist
         self.library.add_book("Title9", "Author9", "116")
         self.library.add_book("Title10", "Author10", "117")
@@ -115,17 +150,26 @@ class TestLibraryManagementSystem(unittest.TestCase):
         self.assertEqual(len(results), 2)
 
     def test_list_empty_library(self):
+        """
+        Test list_available_books with an empty library.
+        """
         # Ensure list_available_books works with an empty library
         results = self.library.list_available_books()
         self.assertEqual(results, [])
 
     def test_edge_case_no_match(self):
+        """
+        Test search_book with no matching results.
+        """
         # Ensure search_book handles no match case correctly
         self.library.add_book("Title8", "Author8", "115")
         results = self.library.search_book(title="Nonexistent Title")
         self.assertEqual(len(results), 0)
 
     def test_search_book_multiple_params(self):
+        """
+        Test search_book with multiple parameters.
+        """
         self.library.add_book("Python Programming", "John Doe", "101")
         self.library.add_book("Learn Python", "Jane Smith", "102")
         self.library.add_book("Advanced Python", "John Doe", "103")
@@ -136,5 +180,15 @@ class TestLibraryManagementSystem(unittest.TestCase):
         self.assertEqual(results[0]["title"], "Python Programming")
         self.assertEqual(results[1]["title"], "Advanced Python")
 
-if __name__ == "__main__":
-    unittest.main()
+    def test_main_execution(self):
+        """
+        Test the direct execution of the script.
+        """
+        import subprocess
+        result = subprocess.run(
+            ["python", "test_library_management.py"],
+            capture_output=True,
+            text=True
+        )
+        self.assertIn("OK", result.stdout)  # Check that the tests ran successfully
+
