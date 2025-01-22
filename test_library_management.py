@@ -125,5 +125,16 @@ class TestLibraryManagementSystem(unittest.TestCase):
         results = self.library.search_book(title="Nonexistent Title")
         self.assertEqual(len(results), 0)
 
+    def test_search_book_multiple_params(self):
+        self.library.add_book("Python Programming", "John Doe", "101")
+        self.library.add_book("Learn Python", "Jane Smith", "102")
+        self.library.add_book("Advanced Python", "John Doe", "103")
+
+        # Search with both title and author
+        results = self.library.search_book(title="Python", author="John")
+        self.assertEqual(len(results), 2)
+        self.assertEqual(results[0]["title"], "Python Programming")
+        self.assertEqual(results[1]["title"], "Advanced Python")
+
 if __name__ == "__main__":
     unittest.main()
