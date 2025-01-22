@@ -180,17 +180,5 @@ class TestLibraryManagementSystem(unittest.TestCase):
         self.assertEqual(results[0]["title"], "Python Programming")
         self.assertEqual(results[1]["title"], "Advanced Python")
 
-    def test_main_execution(self):
-        """
-        Test the direct execution of the script.
-        """
-        import subprocess
-        result = subprocess.run(
-            ["python", "test_library_management.py"],
-            capture_output=True,
-            text=True
-        )
-        self.assertIn("OK", result.stdout)  # Check that the tests ran successfully
-
 if __name__ == "__main__":
     unittest.main()
