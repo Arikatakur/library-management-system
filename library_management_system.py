@@ -41,12 +41,14 @@ class LibraryManagementSystem:
         
         results = []
         for book in self.books:
-            if (title and title.lower() in book["title"].lower()) or \
-            (author and author.lower() in book["author"].lower()) or \
-            (isbn and isbn == book["isbn"]):
+            # Check if the book matches ALL provided filters
+            matches_title = not title or title.lower() in book["title"].lower()
+            matches_author = not author or author.lower() in book["author"].lower()
+            matches_isbn = not isbn or isbn == book["isbn"]
+            
+            if matches_title and matches_author and matches_isbn:
                 results.append(book)
         return results
-
 
     def list_available_books(self):
         return [book for book in self.books if book["available"]]
