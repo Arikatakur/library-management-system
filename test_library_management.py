@@ -181,4 +181,4 @@ class TestLibraryManagementSystem(unittest.TestCase):
         self.assertEqual(results[1]["title"], "Advanced Python")
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main() # pragma: no cover
