@@ -1,0 +1,6 @@
+Name                           Stmts   Miss  Cover   Missing
+------------------------------------------------------------
+library_management_system.py      39      0   100%
+test_library_management.py        95      0   100%
+------------------------------------------------------------
+TOTAL                            134      0   100%
